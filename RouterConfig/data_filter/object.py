@@ -14,9 +14,11 @@ class DataFilterParams(object):
 
     def as_dict(self):
         """transform the object to dict"""
-        return {k: getattr(self, k) \
-                for k in self.fields \
-                if self.obj_attr_is_set(k)}
+        return {
+            k: getattr(self, k)
+            for k in self.fields
+            if self.obj_attr_is_set(k)
+        }
 
     @schemautils.validate_schema(schemas.data_filter_schema, logger=logger)
     def _from_json(self, body):
@@ -24,8 +26,6 @@ class DataFilterParams(object):
         transform from the json data to object
         :param body: the json data
         :type dict
-        :param data_filter_params_obj: the DataFilterParams object
-        :type DataFilterParams
         :return:
         """
         for field in self.fields:
