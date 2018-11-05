@@ -19,6 +19,7 @@ class CongestionControlDriver(Driver):
 
     def parse(self):
         """parse the configuration to command"""
+        # self.execute_cmds_list is a list in list.
         self.execute_cmds_list = [congestion_control_params_obj._to_tc_cmds()
                                   for congestion_control_params_obj in self.congestion_control_params_objs]
 
