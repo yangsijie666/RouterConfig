@@ -4,6 +4,7 @@ from RouterConfig.data_filter import logger
 
 
 class DataFilterParams(object):
+
     fields = [
         'source_mac',
         'ip_address',
@@ -46,8 +47,9 @@ class DataFilterParams(object):
 
     def _to_iptables_cmd(self):
         """
-        transform from the data_filter_schema to iptables params
-        :return:
+        transform from the data_filter_schema to iptables command
+        :return: command of iptables
+        :type: str
         """
         cmd = 'iptables '
         cmd_table = '-t raw -A PREROUTING '
