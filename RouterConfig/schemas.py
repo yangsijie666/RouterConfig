@@ -10,6 +10,10 @@ main_schema = {
         "data_filter": {
             "type": "array",
             "items": {"default": {}}
+        },
+        "congestion_control": {
+            "type": "array",
+            "items": {"default": {}}
         }
     },
     "default": {}
