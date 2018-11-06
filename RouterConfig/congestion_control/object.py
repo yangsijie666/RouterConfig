@@ -52,7 +52,8 @@ class CongestionControlParams(object):
         cmds.append(self._init_tc_config())
 
         cmds.append('tc qdisc add dev {} root handle 1: htb default 1 r2q 0'.format(self.nic))
-        cmds.append('tc qdisc add dev {} classid 1:1 htb rate {} ceil {}'.format(self.nic, self.speed, self.speed))
+        cmds.append('tc class add dev {} classid 1:1 htb rate {} ceil {}'.format(self.nic, self.speed, self.speed))
+        return cmds
 
     def _init_tc_config(self):
         return 'tc qdisc del dev {} root'.format(self.nic)
