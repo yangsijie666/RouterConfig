@@ -1,5 +1,4 @@
 from RouterConfig.common import schema as schemautils
-from driver import Driver
 from RouterConfig.route_config.route import RouteConfigDriver
 from RouterConfig.data_filter.filter import DataFilterDriver
 from RouterConfig.congestion_control.controller import CongestionControlDriver
@@ -8,7 +7,7 @@ from RouterConfig import logger
 import schemas
 
 
-class MainDriver(Driver):
+class MainDriver(object):
 
     fields = [
         'route_config',
@@ -28,14 +27,10 @@ class MainDriver(Driver):
         driver._create_sub_drivers(body)
         return driver
 
-    def parse(self):
-        """let all sub drivers to parse the configuration"""
+    def parse_and_apply(self):
+        """let all sub drivers to parse the configuration and apply them"""
         for sub_driver in self.sub_drivers:
             sub_driver.parse()
-
-    def apply(self):
-        """let all sub drivers to apply the configuration"""
-        for sub_driver in self.sub_drivers:
             sub_driver.apply()
 
     def _create_sub_drivers(self, json_data):

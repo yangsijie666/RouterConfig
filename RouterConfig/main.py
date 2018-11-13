@@ -21,8 +21,7 @@ def main(config_file_path):
     init_router()
 
     driver = MainDriver.create_driver(body=load_config(config_file_path))
-    driver.parse()
-    driver.apply()
+    driver.parse_and_apply()
 
 
 if __name__ == '__main__':
