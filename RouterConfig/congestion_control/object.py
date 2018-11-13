@@ -44,7 +44,7 @@ class CongestionControlParams(object):
 
     def _to_tc_cmds(self):
         """
-        transform from the data_filter_schema to tc commands
+        transform from the CongestionControlParams object to tc commands
         :return: commands of tc
         :type: list
         """

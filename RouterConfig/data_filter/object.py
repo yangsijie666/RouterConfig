@@ -47,7 +47,7 @@ class DataFilterParams(object):
 
     def _to_iptables_cmd(self):
         """
-        transform from the data_filter_schema to iptables command
+        transform from the DataFilterParams object to iptables command
         :return: command of iptables
         :type: str
         """
