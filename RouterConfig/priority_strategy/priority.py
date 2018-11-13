@@ -19,8 +19,10 @@ class PriorityStrategyDriver(Driver):
 
     def parse(self):
         """parse the configuration to command"""
-        self.execute_cmds_list = [priority_strategy_params_obj._to_iptables_and_tc_cmds()
-                                  for priority_strategy_params_obj in self.priority_strategy_params_objs]
+        self.execute_cmds_list = []
+        mark_number = 1
+        for priority_strategy_params_obj in self.priority_strategy_params_objs:
+            self.execute_cmds_list.append(priority_strategy_params_obj._to_iptables_and_tc_cmds(mark_number))
 
     def apply(self):
         """use api to apply the command"""
