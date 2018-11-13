@@ -3,6 +3,7 @@ from driver import Driver
 from RouterConfig.route_config.route import RouteConfigDriver
 from RouterConfig.data_filter.filter import DataFilterDriver
 from RouterConfig.congestion_control.controller import CongestionControlDriver
+from RouterConfig.priority_strategy.priority import PriorityStrategyDriver
 from RouterConfig import logger
 import schemas
 
@@ -49,4 +50,4 @@ class MainDriver(Driver):
                 elif field == 'congestion_control':
                     self.sub_drivers.append(CongestionControlDriver.create_driver(config_data))
                 elif field == 'priority_strategy':
-                    pass
+                    self.sub_drivers.append(PriorityStrategyDriver.create_driver(config_data))
