@@ -20,5 +20,6 @@ main_schema = {
             "items": {"default": {}}
         }
     },
-    "default": {}
+    "default": {},
+    "additionalProperties": False
 }
