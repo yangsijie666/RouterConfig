@@ -72,7 +72,7 @@ The file should be placed under `/root`, and should be named as `config.json`.
             "speed": "设置的端口带宽(单位包括bit,kbit,mbit,gbit,tbit,bps,kbps,mbps,gbps,tbps)"
         }
     ],
-    "priority_stategy": [
+    "priority_strategy": [
         {
             "source_mac": "根据源mac进行匹配",
             "ip_address": {
