@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 
 class API(object):
@@ -16,3 +17,6 @@ class API(object):
             if self.logger is not None:
                 self.logger.info('Command: \'' + cmd + '\' has been applied.', exc_info=True)
             return True
+
+    def execute_and_return(self, cmd):
+        return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
