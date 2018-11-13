@@ -1,10 +1,10 @@
-import load_file
-from main_driver import MainDriver
-from common.shell import api
-
 import sys
 
 sys.path.extend(['/RouterConfig'])  # the python file is put at /RouterConfig/RouterConfig/main.py
+
+import load_file
+from main_driver import MainDriver
+from common.shell import api
 
 
 def init_router():
@@ -19,7 +19,7 @@ def load_config(config_file_path):
 
 def main(config_file_path):
     init_router()
-    
+
     driver = MainDriver.create_driver(body=load_config(config_file_path))
     driver.parse()
     driver.apply()
