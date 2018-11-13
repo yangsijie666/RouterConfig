@@ -14,6 +14,10 @@ main_schema = {
         "congestion_control": {
             "type": "array",
             "items": {"default": {}}
+        },
+        "priority_strategy": {
+            "type": "array",
+            "items": {"default": {}}
         }
     },
     "default": {}
