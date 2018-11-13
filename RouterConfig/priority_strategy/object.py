@@ -216,7 +216,7 @@ class PriorityStrategyParams(object):
         else:
             htb_handle = ret
             ret = subprocess.Popen('tc -s class show dev %s | grep " htb " | cut -d " " -f 3' % self.interface,
-                               shell=True, stdout=subprocess.PIPE).communicate()[0]
+                               shell=True, stdout=subprocess.PIPE).communicate()[0].strip('\n')
             if ret == '':
                 return None
             else:
