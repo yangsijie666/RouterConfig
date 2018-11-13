@@ -52,12 +52,12 @@ The file should be placed under `/root`, and should be named as `config.json`.
         {
             "source_mac": "根据源mac进行过滤",
             "ip_address": {
-                "src": "根据源ip地址进行过滤",
-                "dst": "根据目的ip地址进行过滤"
+                "src": ["根据源ip地址进行过滤"],
+                "dst": ["根据目的ip地址进行过滤"]
             },
             "port": {
-                "src": "根据四层源端口进行过滤",
-                "dst": "根据四层目的端口进行过滤"
+                "src": ["根据四层源端口进行过滤"],
+                "dst": ["根据四层目的端口进行过滤"]
             },
             "protocol": "需要过滤的协议，包括all、tcp、udp、icmp，默认是all",
             "nic": {
@@ -70,6 +70,22 @@ The file should be placed under `/root`, and should be named as `config.json`.
         {
             "nic": "网卡名",
             "speed": "设置的端口带宽(单位包括bit,kbit,mbit,gbit,tbit,bps,kbps,mbps,gbps,tbps)"
+        }
+    ],
+    "priority_stategy": [
+        {
+            "source_mac": "根据源mac进行匹配",
+            "ip_address": {
+                "src": ["根据源ip地址进行匹配"],
+                "dst": ["根据目的ip地址进行匹配"]
+            },
+            "port": {
+                "src": ["根据四层源端口进行匹配"],
+                "dst": ["根据四层目的端口进行匹配"]
+            },
+            "protocol": "需要过滤的协议，包括all、tcp、udp、icmp，默认是all",
+            "interface": "优先级队列所在的网卡名",
+            "priority": "需要设置的优先级，包括low、normal、high，默认都是normal"
         }
     ]
 }
@@ -152,6 +168,22 @@ The file should be placed under `/root`, and should be named as `config.json`.
         {
             "nic": "eth1",
             "speed": "10bps"
+        }
+    ],
+    "priority_strategy": [
+        {
+            "source_mac": "00:00:00:00:00:02",
+            "ip_address": {
+                "src": ["1.0.0.1", "2.0.0.1"],
+                "dst": ["3.0.0.1"]
+            },
+            "port": {
+                "src": "80",
+                "dst": "80"
+            },
+            "protocol": "tcp",
+            "interface": "eth0",
+            "priority": "high"
         }
     ]
 }
