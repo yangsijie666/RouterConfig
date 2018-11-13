@@ -33,7 +33,7 @@ data_filter_schema = {
                 "dst": {"type": "string"}
             }
         },
-        "protocol": {"type": "string", "enum": ["all", "tcp", "udp"]},
+        "protocol": {"type": "string", "enum": ["all", "tcp", "udp", "icmp"]},
         "nic": {
             "type": "object",
             "properties": {
