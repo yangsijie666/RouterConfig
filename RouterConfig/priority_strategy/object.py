@@ -138,6 +138,7 @@ class PriorityStrategyParams(object):
                 self.apply_qdisc_prio(htb_classid, prio_handle)
                 cmds.append(self._generate_prio_filter(prio_handle, mark_number))
             else:
+                self.init_qdisc()
                 # create a qdisc prio first before generate filters
                 self.apply_qdisc_prio('root', '1')
                 cmds.append(self._generate_prio_filter('1', mark_number))

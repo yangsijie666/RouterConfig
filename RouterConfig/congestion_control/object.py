@@ -1,6 +1,7 @@
 from RouterConfig.common import schema as schemautils
 from RouterConfig.congestion_control import schemas
 from RouterConfig.congestion_control import logger
+from RouterConfig.common.shell.api import API
 
 
 class CongestionControlParams(object):
@@ -9,6 +10,8 @@ class CongestionControlParams(object):
         'nic',
         'speed'
     ]
+
+    execute_cmd_api = API(logger=logger)
 
     def as_dict(self):
         """transform the object to dict"""
@@ -48,12 +51,17 @@ class CongestionControlParams(object):
         :return: commands of tc
         :type: list
         """
-        cmds = []
-        cmds.append(self._init_tc_config())
+        self._init_tc_config()
 
+        cmds = []
         cmds.append('tc qdisc add dev {} root handle 1: htb default 1 r2q 0'.format(self.nic))
         cmds.append('tc class add dev {} classid 1:1 htb rate {} ceil {}'.format(self.nic, self.speed, self.speed))
         return cmds
 
     def _init_tc_config(self):
-        return 'tc qdisc del dev {} root'.format(self.nic)
+        """
+        initiate qdisc root
+        :return:
+        """
+        cmd = 'tc qdisc del dev {} root'.format(self.nic)
+        self.execute_cmd_api.execute(cmd)
