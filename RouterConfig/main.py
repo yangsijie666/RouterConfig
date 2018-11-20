@@ -11,7 +11,7 @@ def init_router():
     """The router should not have a default route by default."""
     execute_api = api.API()
     default_info = execute_api.execute_and_return('ip route | grep default').split('\n')[:-1]
-    for i in len(default_info):
+    for i in range(len(default_info)):
         execute_api.execute('ip route del default')
 
 
