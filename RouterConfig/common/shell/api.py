@@ -1,5 +1,6 @@
 import os
 import subprocess
+import six
 
 
 class API(object):
@@ -19,4 +20,7 @@ class API(object):
             return True
 
     def execute_and_return(self, cmd):
-        return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
+        if six.PY2:
+            return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
+        else:
+            return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0].decode()
