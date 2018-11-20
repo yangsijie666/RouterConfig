@@ -20,9 +20,13 @@ def load_config(config_file_path):
 
 
 def main(config_file_path):
+    # load config file
+    config_file = load_config(config_file_path)
+
+    # initiate the router
     init_router()
 
-    driver = MainDriver.create_driver(body=load_config(config_file_path))
+    driver = MainDriver.create_driver(body=config_file)
     driver.parse_and_apply()
 
 
