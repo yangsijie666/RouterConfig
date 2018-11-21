@@ -25,5 +25,7 @@ class API(object):
         else:
             ret = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0].decode()
 
-        self.logger.debug('Command: \'' + cmd + '\' has been applied and return the following: \'' + ret + '\'.')
+        if self.logger is not None:
+            self.logger.debug('Command: \'' + cmd + '\' has been applied and return the following: \'' + ret + '\'.')
+
         return ret
