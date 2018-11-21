@@ -101,10 +101,11 @@ class ConfigureProcess(Process):
 
     def __init__(self, config_file):
         super(ConfigureProcess, self).__init__()
+        self.config_file = config_file
         self.daemon = True
         self.initial_handler = InitialHandler()
 
-    def run(self, config_file):
+    def run(self):
         self.initial_handler.initial()
-        driver = MainDriver.create_driver(body=config_file)
+        driver = MainDriver.create_driver(body=self.config_file)
         driver.parse_and_apply()
