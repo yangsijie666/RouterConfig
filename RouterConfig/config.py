@@ -16,7 +16,7 @@ class ConfigureHandler(object):
         self.config_file_path = config_file_path
         self.load_file_handler = LoadFileHandler(self.config_file_path)
         self.execute_api = api.API(logger=logger)
-        self.last_configure_process = None
+        self.last_configure_process = []
         self.first_boot = True
         self.last_modified_time = None
 
@@ -68,12 +68,15 @@ class ConfigureHandler(object):
         """Create subprocess to parse and apply the configuration."""
         # Before we create the new process, we must be sure
         # that the old process has been terminated.
-        if (self.last_configure_process is not None) and \
-                self._check_process_exists_by_pid(self.last_configure_process):
-            os.kill(self.last_configure_process, sig=signal.SIGTERM)
+        if self.last_configure_process:
+            for pid in self.last_configure_process:
+                if self._check_process_exists_by_pid(pid):
+                    os.kill(pid, sig=signal.SIGTERM)
+            # empty the last_configure_process
+            self.last_configure_process = []
 
         configure_process = ConfigureProcess(config_file)
-        self.last_configure_process = configure_process.pid
+        self.last_configure_process.append(configure_process.pid)
         configure_process.start()
 
     def _check_process_exists_by_pid(self, pid):
