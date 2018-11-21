@@ -75,9 +75,12 @@ class ConfigureHandler(object):
             # empty the last_configure_process
             self.last_configure_process = []
 
-        configure_process = ConfigureProcess(config_file)
-        self.last_configure_process.append(configure_process.pid)
-        configure_process.start()
+        try:
+            configure_process = ConfigureProcess(config_file)
+            self.last_configure_process.append(configure_process.pid)
+            configure_process.start()
+        except Exception:
+            pass
 
     def _check_process_exists_by_pid(self, pid):
         """
