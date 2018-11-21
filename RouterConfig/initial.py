@@ -67,7 +67,7 @@ class InitialHandler(object):
     def _get_all_nic(self):
         """Get all nics."""
         nic_list = self.execute_api.execute_and_return(
-            'ip a | grep \'<\' | awk \'{print $2}\' | cut -d \':\' -f 1').split('\n')[:-1]
+            'ip a | grep \'<\' | awk \'{print $2}\' | cut -d \':\' -f 1 | cut -d \'@\' -f 1').split('\n')[:-1]
         return nic_list
 
     def _get_pid_by_name(self, pname):
