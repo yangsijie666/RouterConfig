@@ -78,8 +78,8 @@ The file should be placed under `/root`, and should be named as `config.json`.
                 "dst": ["根据目的ip地址进行过滤"]
             },
             "port": {
-                "src": ["根据四层源端口进行过滤"],
-                "dst": ["根据四层目的端口进行过滤"]
+                "src": "根据四层源端口进行过滤",
+                "dst": "根据四层目的端口进行过滤"
             },
             "protocol": "需要过滤的协议，包括all、tcp、udp、icmp，默认是all",
             "nic": {
