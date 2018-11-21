@@ -21,6 +21,9 @@ class API(object):
 
     def execute_and_return(self, cmd):
         if six.PY2:
-            return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
+            ret = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
         else:
-            return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0].decode()
+            ret = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0].decode()
+
+        self.logger.info('Command: \'' + cmd + '\' has been applied and return the following: \'' + ret + '\'.')
+        return ret
