@@ -6,9 +6,13 @@
 3. Install related dependencies.
    pip install -r /RouterConfig/requirements.txt
 4. Configure the software to boot from the boot.(optional)
-   (1) (KVM)Add the following to the /etc/rc.local file: sudo python /RouterConfig/RouterConfig/main.py &
-   (2) (Docker):step12_image based on ubuntu docker image
-      1). Dockerfile: 
+   - KVM: Add the following to the `/etc/rc.local` file: 
+        ```vim
+        sudo python /RouterConfig/RouterConfig/main.py &
+        ```
+   - Docker: step12_image based on ubuntu docker image
+      1. Dockerfile: 
+        ```dockerfile
          FROM step12_image:latest
          RUN mkdir -p /var/log/RouterConfig/
          RUN apt-get install -y iptables
@@ -18,10 +22,13 @@
          WORKDIR /root/
          ADD init_conf.sh /root/init_conf.sh
          CMD sh /root/init_conf.sh; /bin/bash
-      2). init_conf.sh
+        ```
+      2. init_conf.sh
+        ```bash
          #!/bin/bash
          python /RouterConfig/RouterConfig/main.py &
          /usr/sbin/sshd -D
+        ```
 
 ### Configuration file:
 
