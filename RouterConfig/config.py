@@ -104,7 +104,7 @@ class ConfigureProcess(Process):
         self.daemon = True
         self.initial_handler = InitialHandler()
 
-    def run(self):
+    def run(self, config_file):
         self.initial_handler.initial()
         driver = MainDriver.create_driver(body=config_file)
         driver.parse_and_apply()
