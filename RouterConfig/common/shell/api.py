@@ -12,11 +12,11 @@ class API(object):
         ret = os.system(cmd)
         if ret != 0:
             if self.logger is not None:
-                self.logger.error('Command: \'' + cmd + '\' is illegal.', exc_info=True)
+                self.logger.debug('Command: \'' + cmd + '\' is illegal.', exc_info=True)
             return False
         else:
             if self.logger is not None:
-                self.logger.info('Command: \'' + cmd + '\' has been applied.', exc_info=True)
+                self.logger.debug('Command: \'' + cmd + '\' has been applied.', exc_info=True)
             return True
 
     def execute_and_return(self, cmd):
@@ -25,5 +25,5 @@ class API(object):
         else:
             ret = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).communicate()[0].decode()
 
-        self.logger.info('Command: \'' + cmd + '\' has been applied and return the following: \'' + ret + '\'.')
+        self.logger.debug('Command: \'' + cmd + '\' has been applied and return the following: \'' + ret + '\'.')
         return ret
