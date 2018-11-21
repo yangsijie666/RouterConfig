@@ -1,34 +1,14 @@
 import sys
-
 sys.path.extend(['/RouterConfig'])  # the python file is put at /RouterConfig/RouterConfig/main.py
 
-import load_file
-from main_driver import MainDriver
-from common.shell import api
-
-
-def init_router():
-    """The router should not have a default route by default."""
-    execute_api = api.API()
-    default_info = execute_api.execute_and_return('ip route | grep default').split('\n')[:-1]
-    for i in range(len(default_info)):
-        execute_api.execute('ip route del default')
-
-
-def load_config(config_file_path):
-    return load_file.load_config(config_file_path)
+from config import ConfigureHandler
 
 
 def main(config_file_path):
-    # load config file
-    config_file = load_config(config_file_path)
-
-    # initiate the router
-    init_router()
-
-    driver = MainDriver.create_driver(body=config_file)
-    driver.parse_and_apply()
+    """Main process."""
+    configure_handler = ConfigureHandler(config_file_path)
+    configure_handler.configure()
 
 
 if __name__ == '__main__':
-    main('/root/config.json')
+    sys.exit(main('/root/config.json'))
