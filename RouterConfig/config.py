@@ -7,6 +7,7 @@ from main_driver import MainDriver
 from initial import InitialHandler
 from load import LoadFileHandler
 from common.shell import api
+from RouterConfig import logger
 
 
 class ConfigureHandler(object):
@@ -14,7 +15,7 @@ class ConfigureHandler(object):
     def __init__(self, config_file_path):
         self.config_file_path = config_file_path
         self.load_file_handler = LoadFileHandler(self.config_file_path)
-        self.execute_api = api.API()
+        self.execute_api = api.API(logger=logger)
         self.last_configure_process = None
         self.first_boot = True
         self.last_modified_time = None

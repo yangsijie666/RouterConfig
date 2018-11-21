@@ -8,7 +8,7 @@ from RouterConfig import logger
 class InitialHandler(object):
 
     def __init__(self):
-        self.execute_api = api.API()
+        self.execute_api = api.API(logger=logger)
 
     def initial(self):
         logger.info('Initialization Started.')
