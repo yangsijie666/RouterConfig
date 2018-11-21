@@ -63,6 +63,7 @@ class InitialHandler(object):
         process_name_list = ['zebra', 'ripd', 'ospfd', 'bgpd']
         _remove_processes(self, process_name_list)
         _remove_configuration(process_name_list)
+        logger.info('Initialization: route config has been done.')
 
     def _get_all_nic(self):
         """Get all nics."""
