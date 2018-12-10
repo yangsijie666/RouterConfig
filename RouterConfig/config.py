@@ -71,7 +71,7 @@ class ConfigureHandler(object):
         if self.last_configure_process:
             for pid in self.last_configure_process:
                 if self._check_process_exists_by_pid(pid):
-                    os.kill(pid, sig=signal.SIGTERM)
+                    os.kill(pid, signal.SIGTERM)
             # empty the last_configure_process
             self.last_configure_process = []
 
