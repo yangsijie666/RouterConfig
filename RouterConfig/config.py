@@ -69,31 +69,25 @@ class ConfigureHandler(object):
         # Before we create the new process, we must be sure
         # that the old process has been terminated.
         if self.last_configure_process:
-            for pid in self.last_configure_process:
-                if self._check_process_exists_by_pid(pid):
+            for configure_process in self.last_configure_process:
+                try:
+                    pid = configure_process.pid
+                    logger.debug('Pid: {pid} is about to exit.'.format(pid=pid))
                     os.kill(pid, signal.SIGTERM)
+                    configure_process.join()
+                    logger.debug('Pid: {pid} has exited.'.format(pid=pid))
+                except OSError:
+                    continue
+
             # empty the last_configure_process
             self.last_configure_process = []
 
         try:
             configure_process = ConfigureProcess(config_file)
-            self.last_configure_process.append(configure_process.pid)
+            self.last_configure_process.append(configure_process)
             configure_process.start()
         except Exception:
             pass
-
-    def _check_process_exists_by_pid(self, pid):
-        """
-        Check if the process specified by pid exists.
-        :param pid: process id of Process
-        :return: True of False
-        """
-        res = self.execute_api.execute_and_return('ps aux | awk \'{print $2}\' | grep \'^' + str(pid) + '$\'').split(
-            '\n')[:-1]
-        if res:
-            return True
-        else:
-            return False
 
 
 class ConfigureProcess(Process):
