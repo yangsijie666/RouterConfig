@@ -63,12 +63,28 @@ class LoadFileHandler(object):
             if not use_user_data_flag:
                 # read config file: /root/config.json
                 logger.info('Try to get config file from local file.')
+                format_error_first = True
+                file_exist_error_first = True
                 while True:
                     try:
                         with open(self.local_config_path, 'r') as f:
                             new_dict = json.load(f, object_pairs_hook=OrderedDict)
                         logger.info('Get config file from local file successfully.')
+                        format_error_first = True
+                        file_exist_error_first = True
                         return new_dict
+                    except ValueError:
+                        if format_error_first:
+                            logger.info('Config file is not in json format.')
+                            format_error_first = False
+                        time.sleep(1)
+                        continue
+                    except IOError:
+                        if file_exist_error_first:
+                            logger.info('Config file does not exists.')
+                            file_exist_error_first = False
+                        time.sleep(1)
+                        continue
                     except:
                         time.sleep(1)
                         continue
