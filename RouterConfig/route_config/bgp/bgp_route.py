@@ -7,7 +7,7 @@ import schemas
 
 class BgpRouteConfigDriver(Driver):
 
-    bgp_config_file = '/usr/local/etc/bgpd.conf'
+    bgp_config_file = '/etc/frr/frr.conf'
     execute_cmd_api = execute_cmd_api(logger=logger)
 
     def __init__(self, json_data, router_id):
@@ -23,7 +23,7 @@ class BgpRouteConfigDriver(Driver):
     def parse(self):
         if len(self.config_dict) != 0:
             bgp_conf = self.config_dict
-            res = "hostname bgpd\npassword zebra\nrouter bgp "
+            res = "router bgp "
             res = res + str(bgp_conf.get("as_num")) + "\nbgp router-id " + self.router_id + "\n"
             res += "bgp log-neighbor-changes\n"
             if 'network' in bgp_conf:
@@ -40,13 +40,13 @@ class BgpRouteConfigDriver(Driver):
             if 'others' in bgp_conf:
                 for ele in bgp_conf.get("others"):
                     res = res + ele + "\n"
-            with open(self.bgp_config_file, 'w') as f:
+            with open(self.bgp_config_file, 'a') as f:
                 f.write(res)
             self.is_configured = True
             logger.info('BGP configuration has been parsed.')
 
     def apply(self):
-        if self.execute_cmd_api.execute('bgpd -d'):
+        if self.execute_cmd_api.execute('systemctl restart frr'):
             logger.info('BGP thread has been turned on.')
         else:
             logger.info('Fail to start BGP thread.')

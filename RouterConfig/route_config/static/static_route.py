@@ -22,7 +22,7 @@ class StaticRouteConfigDriver(Driver):
 
     def parse(self):
         if len(self.config_dict) > 0:
-            res = "hostname zebra\npassword zebra\n"
+            res = ""
             for static_info in self.config_dict:
                 if len(static_info) > 0:
                     next_hop_or_src_port = static_info.get('next_hop')
@@ -36,7 +36,7 @@ class StaticRouteConfigDriver(Driver):
             logger.info('Static Route configuration has been parsed.')
 
     def apply(self):
-        if self.execute_cmd_api.execute('zebra -d'):
+        if self.execute_cmd_api.execute('systemctl restart frr'):
             logger.info('Zebra for Static Route thread has been turned on.')
         else:
             logger.info('Fail to start Zebra for Static Route thread.')

@@ -46,23 +46,24 @@ class InitialHandler(object):
     def _remove_route_config(self):
         """Initialize the quagga."""
 
-        def _remove_processes(self, process_name_list):
-            """Terminate specified quagga processes."""
-            for process_name in process_name_list:
-                pid = self._get_pid_by_name(process_name + ' -d')
-                if pid is not None:
-                    os.kill(pid, signal.SIGTERM)
+        # def _remove_processes(self, process_name_list):
+        #     """Terminate specified quagga processes."""
+        #     for process_name in process_name_list:
+        #         pid = self._get_pid_by_name(process_name + ' -d')
+        #         if pid is not None:
+        #             os.kill(pid, signal.SIGTERM)
 
-        def _remove_configuration(process_name_list):
+        def _remove_configuration():
             """Remove quagga configuration files."""
-            for process_name in process_name_list:
-                configuration_path = '/usr/local/etc/' + process_name + '.conf'
-                if os.path.exists(configuration_path):
-                    os.remove(configuration_path)
+            # for process_name in process_name_list:
+            configuration_path = '/etc/frr/frr.conf'
+            with open(configuration_path, "w") as f:
+                f.write("")
 
-        process_name_list = ['zebra', 'ripd', 'ospfd', 'bgpd']
-        _remove_processes(self, process_name_list)
-        _remove_configuration(process_name_list)
+        # process_name_list = ['zebra', 'ripd', 'ospfd', 'bgpd']
+        # _remove_processes(self, process_name_list)
+        # _remove_configuration(process_name_list)
+        _remove_configuration()
         logger.info('Initialization: route config has been done.')
 
     def _get_all_nic(self):

@@ -175,7 +175,6 @@ class PriorityStrategyParams(object):
         cmd = 'tc filter add dev {} prio 8 parent {}: handle {} fw flowid {}:{}'\
             .format(self.interface, parent_handle, handle, parent_handle, priority)
         return cmd
-
     def _get_filter_priority(self):
         """
         Get priority based on the configuration file.

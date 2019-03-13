@@ -7,7 +7,7 @@ import schemas
 
 class RipRouteConfigDriver(Driver):
 
-    rip_config_file = '/usr/local/etc/ripd.conf'
+    rip_config_file = '/etc/frr/frr.conf'
     execute_cmd_api = execute_cmd_api(logger=logger)
 
     def __init__(self, json_data):
@@ -22,7 +22,7 @@ class RipRouteConfigDriver(Driver):
     def parse(self):
         if len(self.config_dict) > 0:
             rip_conf = self.config_dict
-            res = "hostname zebra\npassword zebra\nrouter rip\n"
+            res = "router rip\n"
             # get rip version (default: version 2)
             rip_version = rip_conf.get("version", 2)
             res += 'version ' + str(rip_version) + '\n'
@@ -35,13 +35,13 @@ class RipRouteConfigDriver(Driver):
                 for other_config in rip_conf.get('others'):
                     res += other_config + '\n'
             # save the configuration
-            with open(self.rip_config_file, 'w') as f:
+            with open(self.rip_config_file, 'a') as f:
                 f.write(res)
             self.is_configured = True
             logger.info('RIP configuration has been parsed.')
 
     def apply(self):
-        if self.execute_cmd_api.execute('ripd -d'):
+        if self.execute_cmd_api.execute('systemctl restart frr'):
             logger.info('RIP thread has been turned on.')
         else:
             logger.info('Fail to start RIP thread.')
