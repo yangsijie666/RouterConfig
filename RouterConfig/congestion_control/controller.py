@@ -25,7 +25,9 @@ class CongestionControlDriver(Driver):
 
     def apply(self):
         """use api to apply the command"""
+        logger.info("Start configuration of congestion control.")
         for execute_cmds in self.execute_cmds_list:
             for execute_cmd in execute_cmds:
                 if execute_cmds != '':
                     self.execute_cmd_api.execute(execute_cmd)
+        logger.info("Finish configuration of congestion control.")

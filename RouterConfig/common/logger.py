@@ -10,7 +10,7 @@ class Logger(object):
 
     def init_logger(self):
         """initiate the logger"""
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.INFO)
         # define the log file location
         logfile = '/var/log/RouterConfig/' + self.log_file_name + '.log'
         fh = logging.FileHandler(logfile, mode='a')

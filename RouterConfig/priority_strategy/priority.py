@@ -27,7 +27,9 @@ class PriorityStrategyDriver(Driver):
 
     def apply(self):
         """use api to apply the command"""
+        logger.info("Start configuration of priority strategy.")
         for execute_cmds in self.execute_cmds_list:
             for execute_cmd in execute_cmds:
                 if execute_cmds != '':
                     self.execute_cmd_api.execute(execute_cmd)
+        logger.info("Finish configuration of priority strategy.")
