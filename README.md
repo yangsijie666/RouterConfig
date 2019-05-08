@@ -117,6 +117,7 @@ The file should be placed under `/root`, and should be named as `config.json`.
 > - If you want to specify `port`, you must specify `protocol`, and its value cannot be 'all', it must be specific to 'udp' or 'tcp'.
 > - If you do not specify `ip_address`, all ip addresses are filtered by default.
 > - If you do not specify `protocol`, all types of data are filtered by default.
+> - `interface` in `priority_strategy` must be specified.
 > - All of the above can be unspecified, and all traffic is filtered by default.
 
 ### Configuration file example:
