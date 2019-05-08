@@ -169,8 +169,7 @@ The file should be placed under `/root`, and should be named as `config.json`.
             },
             "protocol": "all",
             "nic": {
-                "in": "eth0",
-                "out": "eth1"
+                "in": "eth0"
             }
         },
         {
