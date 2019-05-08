@@ -49,4 +49,4 @@ class BgpRouteConfigDriver(Driver):
         if self.execute_cmd_api.execute('bgpd -d'):
             logger.info('BGP thread has been turned on.')
         else:
-            logger.info('Fail to start BGP thread.')
+            logger.error('Fail to start BGP thread.')

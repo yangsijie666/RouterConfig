@@ -37,7 +37,7 @@ class OspfRouteConfigDriver(Driver):
         if self.execute_cmd_api.execute('ospfd -d'):
             logger.info('OSPF thread has been turned on.')
         else:
-            logger.info('Fail to start OSPF thread.')
+            logger.error('Fail to start OSPF thread.')
 
     @classmethod
     def parse_and_apply_default_config(cls, router_id):
@@ -51,4 +51,4 @@ class OspfRouteConfigDriver(Driver):
         if cls.execute_cmd_api.execute('ospfd -d'):
             logger.info('Default OSPF thread has been turned on.')
         else:
-            logger.info('Fail to start default OSPF thread.')
+            logger.error('Fail to start default OSPF thread.')
