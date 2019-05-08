@@ -14,10 +14,10 @@ class API(object):
         res = "hostname frr\n"
         with open(cls.zebra_config_file, 'a') as f:
             f.write(res)
-        logger.info('Zebra has been initiated.')
+        logger.debug('Zebra has been initiated.')
 
     def start_zebra(self):
         if self.execute_cmd_api.execute('systemctl restart frr'):
-            logger.info('Zebra thread has been turned on.')
+            logger.debug('Zebra thread has been turned on.')
         else:
-            logger.info('Fail to start Zebra thread.')
+            logger.error('Fail to start Zebra thread.')

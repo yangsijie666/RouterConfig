@@ -37,6 +37,6 @@ class StaticRouteConfigDriver(Driver):
 
     def apply(self):
         if self.execute_cmd_api.execute('systemctl restart frr'):
-            logger.info('Zebra for Static Route thread has been turned on.')
+            logger.info('Static Route thread has been turned on.')
         else:
-            logger.info('Fail to start Zebra for Static Route thread.')
+            logger.error('Fail to start Zebra for Static Route thread.')

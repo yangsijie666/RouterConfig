@@ -44,4 +44,4 @@ class RipRouteConfigDriver(Driver):
         if self.execute_cmd_api.execute('systemctl restart frr'):
             logger.info('RIP thread has been turned on.')
         else:
-            logger.info('Fail to start RIP thread.')
+            logger.error('Fail to start RIP thread.')
