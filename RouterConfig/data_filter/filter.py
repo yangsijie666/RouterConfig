@@ -24,6 +24,8 @@ class DataFilterDriver(Driver):
 
     def apply(self):
         """use api to apply the command"""
+        logger.info("Start configuration of data filtering.")
         for execute_cmd in self.execute_cmds:
             if execute_cmd != '':
                 self.execute_cmd_api.execute(execute_cmd)
+        logger.info("Finish configuration of data filtering.")
