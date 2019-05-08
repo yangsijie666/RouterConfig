@@ -23,6 +23,7 @@ class PriorityStrategyDriver(Driver):
         mark_number = 1
         for priority_strategy_params_obj in self.priority_strategy_params_objs:
             self.execute_cmds_list.append(priority_strategy_params_obj._to_iptables_and_tc_cmds(mark_number))
+            mark_number += 1
 
     def apply(self):
         """use api to apply the command"""
