@@ -61,7 +61,7 @@ The file should be placed under `/root`, and should be named as `config.json`.
         "static": [
             {
                 "next_hop": "出接口或下一跳ip地址",
-                "dst_prefix": "目标网段"
+                "dst_prefix": ["目标网段"]
             }
         ],
         "rip": {
