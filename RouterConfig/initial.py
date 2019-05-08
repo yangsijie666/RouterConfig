@@ -27,13 +27,13 @@ class InitialHandler(object):
         default_route_info = self.execute_api.execute_and_return('ip route | grep default').split('\n')[:-1]
         for i in range(len(default_route_info)):
             self.execute_api.execute('ip route del default')
-        logger.info('Initialization: default route has been done.')
+        logger.debug('Initialization: default route has been done.')
 
     def _remove_iptables_config(self):
         """Initialize the iptables."""
         for table in ['raw', 'mangle', 'filter', 'nat']:
             self.execute_api.execute('iptables -t ' + table + ' -F')
-        logger.info('Initialization: iptables has been done.')
+        logger.debug('Initialization: iptables has been done.')
 
     def _remove_tc_config(self):
         """Initialize the tc."""
@@ -41,7 +41,7 @@ class InitialHandler(object):
         for nic in all_nic:
             if nic != 'lo':
                 self.execute_api.execute('tc qdisc del dev ' + nic + ' root')
-        logger.info('Initialization: tc has been done.')
+        logger.debug('Initialization: tc has been done.')
 
     def _remove_route_config(self):
         """Initialize the quagga."""
@@ -63,7 +63,7 @@ class InitialHandler(object):
         process_name_list = ['zebra', 'ripd', 'ospfd', 'bgpd']
         _remove_processes(self, process_name_list)
         _remove_configuration(process_name_list)
-        logger.info('Initialization: route config has been done.')
+        logger.debug('Initialization: route config has been done.')
 
     def _get_all_nic(self):
         """Get all nics."""
